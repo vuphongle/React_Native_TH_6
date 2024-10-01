@@ -1,0 +1,9 @@
+Android Java:
+- ListView: RecylerView, hodler,....
+- GridView
+
+ReactNative: Flatlist
+
+Horizontal
+ 
+
