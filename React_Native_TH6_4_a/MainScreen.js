@@ -14,84 +14,57 @@ const MainScreen = () => {
     {
       id: "1",
       productName: "Ca nấu lẩu, nấu mì mini",
-      price: "250,000 VND",
-      discount: "Giảm 20%",
-      rating: 4.5,
-      reviewCount: 120,
-      image: "https://via.placeholder.com/100.png?text=Ca+nau+lau",
+      shopName: "Shop Lẩu Thịnh",
+      image: "https://via.placeholder.com/150.png?text=Ca+nau+lau",
     },
     {
       id: "2",
       productName: "1KG KHÔ GÀ BƠ TỎI",
-      price: "180,000 VND",
-      discount: "Giảm 10%",
-      rating: 4,
-      reviewCount: 95,
-      image: "https://via.placeholder.com/100.png?text=Kho+Ga+Bo+Toi",
+      shopName: "Shop Thịt Ngon",
+      image: "https://via.placeholder.com/150.png?text=Kho+Ga+Bo+Toi",
     },
     {
       id: "3",
       productName: "Xe cần cẩu đa năng",
-      price: "400,000 VND",
-      discount: "Giảm 15%",
-      rating: 5,
-      reviewCount: 45,
-      image: "https://via.placeholder.com/100.png?text=Can+Xuc",
+      shopName: "Shop Đồ Chơi",
+      image: "https://via.placeholder.com/150.png?text=Can+Xuc",
     },
     {
       id: "4",
       productName: "Đồ chơi dạng mô hình",
-      price: "150,000 VND",
-      discount: "Giảm 5%",
-      rating: 3.5,
-      reviewCount: 30,
-      image: "https://via.placeholder.com/100.png?text=Do+choi+mo+hinh",
+      shopName: "Shop Mô Hình",
+      image: "https://via.placeholder.com/150.png?text=Do+choi+mo+hinh",
     },
     {
       id: "5",
       productName: "Lãnh đạo giản đơn",
-      price: "95,000 VND",
-      discount: "Giảm 10%",
-      rating: 4.5,
-      reviewCount: 80,
-      image: "https://via.placeholder.com/100.png?text=Lanh+Dao+Gian+Don",
+      shopName: "Shop Sách Hay",
+      image: "https://via.placeholder.com/150.png?text=Lanh+Dao+Gian+Don",
     },
     {
       id: "6",
       productName: "Hiểu lòng con trẻ",
-      price: "120,000 VND",
-      discount: "Giảm 25%",
-      rating: 4.8,
-      reviewCount: 60,
-      image: "https://via.placeholder.com/100.png?text=Hieu+Long+Con+Tre",
+      shopName: "Shop Sách Phụ Huynh",
+      image: "https://via.placeholder.com/150.png?text=Hieu+Long+Con+Tre",
     },
   ];
 
   const renderItem = ({ item }) => {
     return (
       <View style={styles.itemContainer}>
-        <Image
-          source={
-            typeof item.image === "string" ? { uri: item.image } : item.image
-          }
-          style={styles.productImage}
-        />
+        {/* Hình ảnh sản phẩm */}
+        <Image source={{ uri: item.image }} style={styles.productImage} />
+
+        {/* Container cho thông tin sản phẩm */}
         <View style={styles.infoContainer}>
           <Text style={styles.productName}>{item.productName}</Text>
-          <Text style={styles.productPrice}>{item.price}</Text>
-          <Text style={styles.discount}>{item.discount}</Text>
-          <View style={styles.ratingContainer}>
-            {Array.from({ length: 5 }).map((_, index) => (
-              <Icon
-                key={index}
-                name={index < Math.floor(item.rating) ? "star" : "star-border"}
-                size={16}
-                color="gold"
-              />
-            ))}
-            <Text style={styles.reviewCount}>({item.reviewCount})</Text>
-          </View>
+          <Text style={styles.shopName}>{item.shopName}</Text>
         </View>
+
+        {/* Nút Chat */}
+        <TouchableOpacity style={styles.chatButton}>
+          <Text style={styles.chatButtonText}>Chat</Text>
+        </TouchableOpacity>
       </View>
     );
   };
@@ -114,7 +87,6 @@ const MainScreen = () => {
         data={products}
         renderItem={renderItem}
         keyExtractor={(item) => item.id}
-        // Không cần numColumns, mặc định là 1
         showsVerticalScrollIndicator={false}
         contentContainerStyle={styles.verticalList}
       />
@@ -137,6 +109,7 @@ const MainScreen = () => {
 
 const styles = StyleSheet.create({
   container: { flex: 1, backgroundColor: "#f5f5f5" },
+
   header: {
     flexDirection: "row",
     alignItems: "center",
@@ -146,59 +119,72 @@ const styles = StyleSheet.create({
     height: 80,
     paddingTop: 30,
   },
+
   headerText: {
     fontSize: 18,
     fontWeight: "bold",
     color: "black",
   },
+
   verticalList: {
     paddingHorizontal: 10,
     paddingVertical: 10,
   },
+
   itemContainer: {
-    flexDirection: "row", // Đặt thành hàng để hiển thị hình ảnh và thông tin cạnh nhau
+    flexDirection: "row",
     padding: 10,
     backgroundColor: "#fff",
     borderRadius: 10,
-    marginBottom: 10, // Thêm khoảng cách dưới mỗi mục
+    marginBottom: 10,
     elevation: 3,
   },
+
   productImage: {
     width: 100,
     height: 100,
-    resizeMode: "contain",
+    resizeMode: "cover",
     borderRadius: 10,
   },
+
   infoContainer: {
     flex: 1,
     marginLeft: 10,
-    justifyContent: "space-between",
+    justifyContent: "flex-start",
   },
+
   productName: {
     fontSize: 16,
     fontWeight: "bold",
     color: "#333",
     marginBottom: 5,
+    textAlign: "left",
   },
-  productPrice: {
-    fontSize: 16,
-    fontWeight: "bold",
-    color: "red",
+
+  shopName: {
+    fontSize: 14,
+    color: "#666",
+    textAlign: "left",
   },
-  discount: {
-    fontSize: 12,
-    color: "gray",
-    marginBottom: 5,
-  },
-  ratingContainer: {
-    flexDirection: "row",
+
+  chatButton: {
+    backgroundColor: "red",
+    paddingVertical: 8,
+    paddingHorizontal: 12,
+    borderRadius: 5,
     alignItems: "center",
+    justifyContent: "center",
+    marginLeft: 10,
+    width: 100,
+    alignSelf: "center",
   },
-  reviewCount: {
-    fontSize: 12,
-    marginLeft: 5,
-    color: "gray",
+
+  chatButtonText: {
+    color: "white",
+    fontSize: 22,
+    fontWeight: "bold",
   },
+
   bottomMenu: {
     flexDirection: "row",
     justifyContent: "space-around",
