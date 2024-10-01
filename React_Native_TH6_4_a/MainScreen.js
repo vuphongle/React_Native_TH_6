@@ -1,3 +1,5 @@
+// src/MainScreen.js
+
 import React from "react";
 import {
   View,
@@ -15,37 +17,43 @@ const MainScreen = () => {
       id: "1",
       productName: "Ca nấu lẩu, nấu mì mini",
       shopName: "Shop Lẩu Thịnh",
-      image: "https://via.placeholder.com/150.png?text=Ca+nau+lau",
+      image: require("./img/ca_nau_lau.png"),
     },
     {
       id: "2",
       productName: "1KG KHÔ GÀ BƠ TỎI",
       shopName: "Shop Thịt Ngon",
-      image: "https://via.placeholder.com/150.png?text=Kho+Ga+Bo+Toi",
+      image: require("./img/ga_bo_toi.png"),
     },
     {
       id: "3",
       productName: "Xe cần cẩu đa năng",
       shopName: "Shop Đồ Chơi",
-      image: "https://via.placeholder.com/150.png?text=Can+Xuc",
+      image: require("./img/xa_can_cau.png"),
     },
     {
       id: "4",
       productName: "Đồ chơi dạng mô hình",
       shopName: "Shop Mô Hình",
-      image: "https://via.placeholder.com/150.png?text=Do+choi+mo+hinh",
+      image: require("./img/do_choi_dang_mo_hinh.png"),
     },
     {
       id: "5",
       productName: "Lãnh đạo giản đơn",
       shopName: "Shop Sách Hay",
-      image: "https://via.placeholder.com/150.png?text=Lanh+Dao+Gian+Don",
+      image: require("./img/lanh_dao_gian_don.png"),
     },
     {
       id: "6",
       productName: "Hiểu lòng con trẻ",
       shopName: "Shop Sách Phụ Huynh",
-      image: "https://via.placeholder.com/150.png?text=Hieu+Long+Con+Tre",
+      image: require("./img/hieu_long_con_tre.png"),
+    },
+    {
+      id: "8",
+      productName: "Donal Trump Thiên tài lãnh đạo",
+      shopName: "Shop Sách Hay",
+      image: require("./img/trump 1.png"),
     },
   ];
 
@@ -53,7 +61,7 @@ const MainScreen = () => {
     return (
       <View style={styles.itemContainer}>
         {/* Hình ảnh sản phẩm */}
-        <Image source={{ uri: item.image }} style={styles.productImage} />
+        <Image source={item.image} style={styles.productImage} />
 
         {/* Container cho thông tin sản phẩm */}
         <View style={styles.infoContainer}>
@@ -62,11 +70,19 @@ const MainScreen = () => {
         </View>
 
         {/* Nút Chat */}
-        <TouchableOpacity style={styles.chatButton}>
+        <TouchableOpacity
+          style={styles.chatButton}
+          onPress={() => handleChat(item)}
+        >
           <Text style={styles.chatButtonText}>Chat</Text>
         </TouchableOpacity>
       </View>
     );
+  };
+
+  const handleChat = (item) => {
+    // Xử lý sự kiện chat, ví dụ: điều hướng đến màn hình chat với shop
+    console.log(`Chat với ${item.shopName}`);
   };
 
   return (
@@ -80,6 +96,13 @@ const MainScreen = () => {
         <TouchableOpacity onPress={() => console.log("Giỏ hàng")}>
           <Icon name="shopping-cart" size={30} color="black" />
         </TouchableOpacity>
+      </View>
+
+      {/* Dòng chữ mới */}
+      <View style={styles.infoTextContainer}>
+        <Text style={styles.infoText}>
+          Bạn có thắc mắc với sản phẩm vừa xem? Đừng ngại chat với shop!
+        </Text>
       </View>
 
       {/* Danh sách sản phẩm dạng một cột */}
@@ -126,6 +149,24 @@ const styles = StyleSheet.create({
     color: "black",
   },
 
+  infoTextContainer: {
+    padding: 10,
+    backgroundColor: "#ffffff",
+    alignItems: "center",
+    justifyContent: "center",
+    marginHorizontal: 10,
+    marginVertical: 5,
+    borderRadius: 5,
+    elevation: 2,
+  },
+
+  infoText: {
+    fontSize: 16,
+    color: "#333",
+    textAlign: "center",
+    width: "80%",
+  },
+
   verticalList: {
     paddingHorizontal: 10,
     paddingVertical: 10,
@@ -138,6 +179,7 @@ const styles = StyleSheet.create({
     borderRadius: 10,
     marginBottom: 10,
     elevation: 3,
+    alignItems: "center", // Đảm bảo các phần tử trong hàng được căn giữa theo chiều dọc
   },
 
   productImage: {
@@ -181,7 +223,7 @@ const styles = StyleSheet.create({
 
   chatButtonText: {
     color: "white",
-    fontSize: 22,
+    fontSize: 16, // Giảm kích thước font để phù hợp hơn
     fontWeight: "bold",
   },
 
