@@ -6,13 +6,65 @@ import {
   TouchableOpacity,
   Image,
   StyleSheet,
-  TextInput,
 } from "react-native";
 import Icon from "react-native-vector-icons/MaterialIcons";
 
 const MainScreen = () => {
   const products = [
-   
+    {
+      id: "1",
+      productName: "Ca nấu lẩu, nấu mì mini",
+      price: "250,000 VND",
+      discount: "Giảm 20%",
+      rating: 4.5,
+      reviewCount: 120,
+      image: "https://via.placeholder.com/100.png?text=Ca+nau+lau",
+    },
+    {
+      id: "2",
+      productName: "1KG KHÔ GÀ BƠ TỎI",
+      price: "180,000 VND",
+      discount: "Giảm 10%",
+      rating: 4,
+      reviewCount: 95,
+      image: "https://via.placeholder.com/100.png?text=Kho+Ga+Bo+Toi",
+    },
+    {
+      id: "3",
+      productName: "Xe cần cẩu đa năng",
+      price: "400,000 VND",
+      discount: "Giảm 15%",
+      rating: 5,
+      reviewCount: 45,
+      image: "https://via.placeholder.com/100.png?text=Can+Xuc",
+    },
+    {
+      id: "4",
+      productName: "Đồ chơi dạng mô hình",
+      price: "150,000 VND",
+      discount: "Giảm 5%",
+      rating: 3.5,
+      reviewCount: 30,
+      image: "https://via.placeholder.com/100.png?text=Do+choi+mo+hinh",
+    },
+    {
+      id: "5",
+      productName: "Lãnh đạo giản đơn",
+      price: "95,000 VND",
+      discount: "Giảm 10%",
+      rating: 4.5,
+      reviewCount: 80,
+      image: "https://via.placeholder.com/100.png?text=Lanh+Dao+Gian+Don",
+    },
+    {
+      id: "6",
+      productName: "Hiểu lòng con trẻ",
+      price: "120,000 VND",
+      discount: "Giảm 25%",
+      rating: 4.8,
+      reviewCount: 60,
+      image: "https://via.placeholder.com/100.png?text=Hieu+Long+Con+Tre",
+    },
   ];
 
   const renderItem = ({ item }) => {
@@ -51,26 +103,20 @@ const MainScreen = () => {
         <TouchableOpacity onPress={() => console.log("Quay lại")}>
           <Icon name="arrow-back" size={30} color="black" />
         </TouchableOpacity>
-        <TextInput
-          style={styles.searchBar}
-          placeholder="Dây cáp USB"
-          onChangeText={(text) => console.log(text)}
-        />
+        <Text style={styles.headerText}>Chat</Text>
         <TouchableOpacity onPress={() => console.log("Giỏ hàng")}>
           <Icon name="shopping-cart" size={30} color="black" />
         </TouchableOpacity>
-        <TouchableOpacity onPress={() => console.log("Menu")}>
-          <Icon name="more-vert" size={30} color="black" />
-        </TouchableOpacity>
       </View>
 
-      {/* Danh sách sản phẩm dạng lưới */}
+      {/* Danh sách sản phẩm dạng một cột */}
       <FlatList
         data={products}
         renderItem={renderItem}
         keyExtractor={(item) => item.id}
-        numColumns={2}
-        columnWrapperStyle={styles.row}
+        // Không cần numColumns, mặc định là 1
+        showsVerticalScrollIndicator={false}
+        contentContainerStyle={styles.verticalList}
       />
 
       {/* Menu dưới cùng */}
@@ -97,40 +143,39 @@ const styles = StyleSheet.create({
     justifyContent: "space-between",
     padding: 10,
     backgroundColor: "#40acff",
-    height: 100,
-    paddingTop: 50,
+    height: 80,
+    paddingTop: 30,
   },
-  searchBar: {
-    flex: 1,
-    backgroundColor: "#fff",
-    paddingHorizontal: 10,
-    borderRadius: 5,
-    marginHorizontal: 10,
+  headerText: {
+    fontSize: 18,
+    fontWeight: "bold",
+    color: "black",
   },
-  row: {
-    flex: 1,
-    justifyContent: "space-between",
+  verticalList: {
     paddingHorizontal: 10,
-    marginBottom: 10,
+    paddingVertical: 10,
   },
   itemContainer: {
-    flex: 1,
+    flexDirection: "row", // Đặt thành hàng để hiển thị hình ảnh và thông tin cạnh nhau
     padding: 10,
     backgroundColor: "#fff",
     borderRadius: 10,
-    margin: 5,
+    marginBottom: 10, // Thêm khoảng cách dưới mỗi mục
     elevation: 3,
   },
   productImage: {
-    width: "100%",
+    width: 100,
     height: 100,
     resizeMode: "contain",
+    borderRadius: 10,
   },
   infoContainer: {
-    marginTop: 5,
+    flex: 1,
+    marginLeft: 10,
+    justifyContent: "space-between",
   },
   productName: {
-    fontSize: 14,
+    fontSize: 16,
     fontWeight: "bold",
     color: "#333",
     marginBottom: 5,
